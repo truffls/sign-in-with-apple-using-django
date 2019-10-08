@@ -117,4 +117,4 @@ func exchangeCode(_ code: String) {
 
 ## 4. Backend authorization process
 
-The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the Backend implementation of Sign In with Apple with Python Social Auth.
+The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md).
