@@ -2,11 +2,11 @@
 
 _Requirements: Xcode 11, iOS 13_
 
-In the example we’re going to implement the logic directly inside a view controller.
+In this example the logic is implemented directly in a view controller.
 
 ## 1. Add the AuthenticationServices framework
 
-First, import the `AuthenticationServices` to your view controller:
+First, import the `AuthenticationServices` to the view controller:
 
 ```swift
 import AuthenticationServices
@@ -14,7 +14,7 @@ import AuthenticationServices
 
 ## 2. Add the Apple ID button to your view
 
-Add the Sign In with Apple button to your view by using the `ASAuthorizationAppleIDButton`. It behaves pretty much like a `UIButton`, except that you can only change the type of title and style. It scales the text according to its frame automatically and even localizes itself. 
+Add the Sign In with Apple button `ASAuthorizationAppleIDButton` to the view. It behaves pretty much like a `UIButton`, except that you can only change the frame, type of title, and style. It scales the text according to its frame automatically and even localizes itself. 
 
 ```swift
 // Instantiate the button with a type and style
@@ -24,24 +24,24 @@ let signInButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
 signInButton.addTarget(self, action: #selector(signInButtonPressed), for: .touchUpInside)
 ```
 
-## 3. iOS Authorization Process
+## 3. iOS authorization process
 
 The process consists of three parts: 
 - Create the request
 - Provide a presentation context
 - Handle the authorization response
 
-### 3.1. Create the Request
+### 3.1. Create the request
 
 The next step is to create the request:
 
 ```swift
 @objc func signInButtonPressed() {
-    // First you create an apple id provider request with the scope of name and email
+    // First you create an apple id provider request with the scope of full name and email
     let request = ASAuthorizationAppleIDProvider().createRequest()
     request.requestedScopes = [.fullName, .email]
 
-    // Instanstiate the authorization controller and set its delegates
+    // Instanstiate and configure the authorization controller
     let authorizationController = ASAuthorizationController(authorizationRequests: [request])
     authorizationController.presentationContextProvider = self
     authorizationController.delegate = self
@@ -76,9 +76,9 @@ func authorizationController(controller: ASAuthorizationController, didCompleteW
 }
 ```
 
-For handling the error by error code you can instantiate an `ASAuthorizationError` object by using the initializer that takes an `NSError` (yes, with underscore. I don’t know why Apple did this) or alternatively you can use `ASAuthorizationError.Code(rawValue: error.code)` to instantiate the code directly which will be optional and return `nil`, however.
+For handling the error you can instantiate an `ASAuthorizationError` object by using the initializer that takes an `NSError` (yes, the parameter label has an underscore. I don’t know why Apple did this) or alternatively you can use `ASAuthorizationError.Code(rawValue: error.code)` to instantiate the code directly which, however, will be optional and might return `nil`.
 
-You can see here (https://developer.apple.com/documentation/authenticationservices/asauthorizationerror/code) the error codes. I recommend to not show an error for the canceled case, since the user actively canceled the process.
+You can see the error codes in the documentation for [ASAuthorizationError.Code](https://developer.apple.com/documentation/authenticationservices/asauthorizationerror/code). I recommend to not show an error alert for the canceled case, since the user actively canceled the process.
 
 
 #### 3.3.2 Handle a successful response
