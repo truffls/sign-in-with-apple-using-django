@@ -14,7 +14,7 @@ import AuthenticationServices
 
 ## 2. Add the Apple ID button to your view
 
-Add the Sign In with Apple button `ASAuthorizationAppleIDButton` to the view. It behaves pretty much like a `UIButton`, except that you can only change the frame, type of title, and style. It scales the text according to its frame automatically and even localizes itself. 
+Add the Sign In with Apple button `ASAuthorizationAppleIDButton` to the view. It behaves pretty much like a `UIButton`, except that you can only change the frame, type of title, corner radius, and style. It scales the text according to its frame automatically and even localizes itself. 
 
 ```swift
 // Instantiate the button with a type and style
@@ -23,6 +23,8 @@ let signInButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
 // Add an action to be called when tapping the button
 signInButton.addTarget(self, action: #selector(signInButtonPressed), for: .touchUpInside)
 ```
+
+You can read more in the documentation of [ASAuthorizationAppleIDButton](https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton).
 
 ## 3. iOS authorization process
 
