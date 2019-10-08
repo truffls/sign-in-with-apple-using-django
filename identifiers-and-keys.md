@@ -33,6 +33,7 @@ Changing the app ID invalidates the provisioning profiles associated with it, so
 12. Click on each profile associated with this app ID and just save it again.
 13. Either download it from the portal manually or through Xcode.
 
+Now you can continue with the [iOS implementation](iOS.md).
 
 ## Create a _Sign In with Apple_ Key for your backend
 
