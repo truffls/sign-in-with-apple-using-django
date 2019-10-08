@@ -2,9 +2,38 @@
 
 _Requirements: Xcode 11, iOS 13_
 
-In this example the logic is implemented directly in a view controller.
+## 1. Add Sign In with Apple to your app's capabilities
 
-## 1. Add the AuthenticationServices framework
+1. Go to project navigator
+2. Select the Xcode project
+3. Select the target
+4. Go to the _Signing & Capabilities_ tab
+5. Click the _+ Capability_ button
+6. Select _Sign In with Apple_
+
+### A) Automatic Signing
+
+Done. Xcode will sync the Capabilities to the Developer Portal and generate new provisioning profiles for you.
+
+### B) Manual Signing
+
+7. Go to the Developer Portal and select _Identifiers_.
+8. Select your app your want to add Sign In with Apple to.
+9. Scroll down to Sign In with Apple and tick the checkbox.
+10. Click Save
+
+By default this app ID is enabled to be the primary app ID. Optionally: If you're using multiple apps or web authentication you might want to assign them to this app ID as a group.
+
+By changing the app ID, the provisioning profiles associated with this it become invalid and we need to generate them again.
+
+11. Go to _Profiles_.
+12. Click on each profile associated with this app ID and just save it again.
+13. Either download it from the portal manually or through Xcode.
+
+
+## 2. Add the AuthenticationServices framework
+
+In this example the logic is implemented directly in a view controller.
 
 First, import the `AuthenticationServices` to the view controller:
 
@@ -12,7 +41,7 @@ First, import the `AuthenticationServices` to the view controller:
 import AuthenticationServices
 ```
 
-## 2. Add the Apple ID button to your view
+## 3. Add the Apple ID button to your view
 
 Add the Sign In with Apple button `ASAuthorizationAppleIDButton` to the view. It behaves pretty much like a `UIButton`, except that you can only change the frame, type of title, corner radius, and style. It scales the text according to its frame automatically and even localizes itself. 
 
@@ -26,14 +55,14 @@ signInButton.addTarget(self, action: #selector(signInButtonPressed), for: .touch
 
 You can read more in the documentation of [ASAuthorizationAppleIDButton](https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton).
 
-## 3. iOS authorization process
+## 4. iOS authorization process
 
 The process consists of three parts: 
 - Create the request
 - Provide a presentation context
 - Handle the authorization response
 
-### 3.1. Create the request
+### 4.1. Create the request
 
 The next step is to create the request:
 
@@ -53,7 +82,7 @@ The next step is to create the request:
 }
 ```
 
-### 3.2. Provide a presentation context
+### 4.2. Provide a presentation context
 
 The presentation context provider simply requires the window in which the modal should be presented. For that your view controller needs to conform to `ASAuthorizationControllerPresentationContextProviding`. It requires only one method:
 
@@ -63,11 +92,11 @@ func presentationAnchor(for controller: ASAuthorizationController) -> ASPresenta
 }
 ```
 
-### 3.3. Handle the authorization response
+### 4.3. Handle the authorization response
 
 Now that we have setup the request and the presentation context, we need to handle the response by conforming to `ASAuthorizationControllerDelegate`:
 
-#### 3.3.1 Handle authorization errors
+#### 4.3.1 Handle authorization errors
 
 ```swift
 func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -83,7 +112,7 @@ For handling the error you can instantiate an `ASAuthorizationError` object by u
 You can see the error codes in the documentation for [ASAuthorizationError.Code](https://developer.apple.com/documentation/authenticationservices/asauthorizationerror/code). I recommend to not show an error alert for the canceled case, since the user actively canceled the process.
 
 
-#### 3.3.2 Handle a successful response
+#### 4.3.2 Handle a successful response
 
 ```swift 
 func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -113,6 +142,6 @@ func exchangeCode(_ code: String) {
 }
 ```
 
-## 4. Backend authorization process
+## 5. Backend authorization process
 
 The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the Backend implementation of Sign In with Apple with Python Social Auth.
