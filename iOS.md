@@ -17,14 +17,19 @@ Done. Xcode will sync the Capabilities to the Developer Portal and generate new 
 
 ### B) Manual Signing
 
+#### Add Sign In With Apple to the app ID
+
 7. Go to the Developer Portal and select _Identifiers_.
 8. Select your app your want to add Sign In with Apple to.
 9. Scroll down to Sign In with Apple and tick the checkbox.
 10. Click Save
 
-By default this app ID is enabled to be the primary app ID. Optionally: If you're using multiple apps or web authentication you might want to assign them to this app ID as a group.
+By default this app ID is enabled to be the primary app ID.  
+Optionally: If you're using multiple apps or web authentication you might want to assign them to this app ID as a group.
 
-By changing the app ID, the provisioning profiles associated with this it become invalid and we need to generate them again.
+#### Re-generate provision profiles
+
+Changing the app ID invalidates the provisioning profiles associated with it, so we need to generate them again.
 
 11. Go to _Profiles_.
 12. Click on each profile associated with this app ID and just save it again.
