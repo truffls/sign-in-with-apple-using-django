@@ -37,7 +37,7 @@ Changing the app ID invalidates the provisioning profiles associated with it, so
 
 Now you can continue with the [iOS implementation](iOS.md#1-add-the-authenticationservices-framework).
 
-## Create a _Sign In with Apple_ Key for your backend
+## Create a key for your backend
 
 ### Go to "Keys" and click "Create a key"
 
@@ -70,5 +70,7 @@ Now you can continue with the [iOS implementation](iOS.md#1-add-the-authenticati
 ### Click on the key to see the key ID again
 
 <img src="resources/key-8.png"/>
+
+### Use the key in your backend
 
 Now you can continue with the [backend implementation](backend.md).
