@@ -7,6 +7,6 @@ Apple is taking a firm stance to protect user's privacy, rather than letting app
 
 This document is about how to implement Sign In with Apple on iOS and server-side verification for account creation in a Python Django backend with Python Social Auth.
 
-1. [Configure Identifiers and Keys on the Apple Developer Portal](identifiers-and-keys.md)
+1. [Configure Identifiers and Keys](identifiers-and-keys.md)
 2. [Implement Sign In with Apple in your backend](backend.md)
 3. [Implement Sign In with Apple in your iOS app](iOS.md)
