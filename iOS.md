@@ -73,7 +73,7 @@ Now that we have setup the request and the presentation context, we need to hand
 
 ```swift
 func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-    let authError = ASAuthorizationError(_nsError: error)
+    let authError = ASAuthorizationError(_nsError: error as NSError)
     switch authError.code {
         // Add cases and handle errors
     }
@@ -89,10 +89,12 @@ You can see the error codes in the documentation for [ASAuthorizationError.Code]
 
 ```swift 
 func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+    if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
         if let data = credential.authorizationCode, let code = String(data: data, encoding: .utf8) {
             // Now send the 'code' to your backend to get an API token.
-            exchangeCode(code)
+            exchangeCode(code) { apiToken, error in
+                // Handle response
+            }
         } else {
             // Handle missing authorization code ...
         }
@@ -103,15 +105,8 @@ func authorizationController(controller: ASAuthorizationController, didCompleteW
 The only interesting information at this point is the `authorizationCode`. We don't store any of the data Apple gives us. We want our backend to verify the code, get the name and email on its own, verify or create a user, and return an API token.
 
 ```swift
-func exchangeCode(_ code: String) {
-    // `myAPI` is a fictional backend API:
-    myAPI.exchangeCode(code) { apiToken, error in
-        if let apiToken = apiToken {
-            // Store API Token
-        } else {
-            // Handle error
-        }
-    }
+func exchangeCode(_ code: String, handler: (String?, Error?) -> Void) {
+    // Call your backend to exchange an API token with the code.
 }
 ```
 
