@@ -117,4 +117,4 @@ func exchangeCode(_ code: String) {
 
 ## Backend authorization process
 
-The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md) or return to the [overview](README.md)
+The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md) or return to the [overview](README.md).
