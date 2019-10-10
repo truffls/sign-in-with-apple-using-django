@@ -5,6 +5,10 @@ Apple announced a new feature, "Sign In with Apple" enabling users to sign in to
 
 Apple is taking a firm stance to protect user's privacy, rather than letting applications see the user's real email address, they will provide the app with a fake or random email address unique to each app. Don't worry! Developers will still be able to send emails to these proxy addresses, it just means developers won't be able to use the email addresses in any other way. This feature will also allow users to disable email forwarding per application.
 
+## What this document will cover
+
+<img src="resources/flow-diagram.png">
+
 This document is about how to implement Sign In with Apple on iOS and server-side verification for account creation in a Python Django backend with Python Social Auth.
 
 1. [Configure Identifiers and Keys](identifiers-and-keys.md)
