@@ -1,6 +1,8 @@
-# Configure Identifiers and Keys on the Apple Developer Portal
+# Identifiers and Keys on Apple's Developer Portal
 
 ## Add Sign In with Apple to your app's capabilities
+
+<img src="resources/xcode-add-sign-in-with-apple.png"/>
 
 1. Go to Xcode's project navigator
 2. Select your Xcode project
@@ -37,13 +39,36 @@ Now you can continue with the [iOS implementation](iOS.md#1-add-the-authenticati
 
 ## Create a _Sign In with Apple_ Key for your backend
 
-1. Go to "Keys"
-2. Click Register a new Key
-3. Give it a name and tick the Sign In with Apple checkbox
-4. Click "Configure" and select you app ID
-5. Click "Save"
-6. Click "Continue"
-7. Click "Register"
-8. Click "Download" (This is important!)
+### Go to "Keys" and click "Create a key"
 
-Once you have the key file you can continue with the [backend implementation](backend.md).
+<img src="resources/key-1.png"/>
+
+### Give it a name and tick the Sign In with Apple checkbox
+
+<img src="resources/key-2.png"/>
+
+### Click "Configure", select you app ID, and click "Save"
+
+<img src="resources/key-3.png"/>
+
+### Click "Continue"
+
+<img src="resources/key-4.png"/>
+
+### Click "Register" to generate the key
+
+<img src="resources/key-5.png"/>
+
+### Download the key file by clicking "Download"
+
+<img src="resources/key-6.png"/>
+
+### Finish by clicking "Done"
+
+<img src="resources/key-7.png"/>
+
+### Click on the key to see the key ID again
+
+<img src="resources/key-8.png"/>
+
+Now you can continue with the [backend implementation](backend.md).
