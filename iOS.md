@@ -4,7 +4,7 @@ _Requirements: Xcode 11, iOS 13_
 
 To get started you'll need to [add Sign In with Apple to your app's capabilities](identifiers-and-keys.md#add-sign-in-with-apple-to-your-apps-capabilities).
 
-## 1. Add the AuthenticationServices framework
+## Add the AuthenticationServices framework
 
 In this example the logic is implemented directly in a view controller.
 
@@ -14,7 +14,7 @@ First, import the `AuthenticationServices` to the view controller:
 import AuthenticationServices
 ```
 
-## 2. Add the Apple ID button to your view
+## Add the Apple ID button to your view
 
 Add the Sign In with Apple button `ASAuthorizationAppleIDButton` to the view. It behaves pretty much like a `UIButton`, except that you can only change the frame, type of title, corner radius, and style. It scales the text according to its frame automatically and even localizes itself. 
 
@@ -28,14 +28,14 @@ signInButton.addTarget(self, action: #selector(signInButtonPressed), for: .touch
 
 You can read more in the documentation of [ASAuthorizationAppleIDButton](https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton).
 
-## 3. iOS authorization process
+## iOS authorization process
 
 The process consists of three parts: 
 - Create the request
 - Provide a presentation context
 - Handle the authorization response
 
-### 3.1. Create the request
+### Create the request
 
 The next step is to create the request:
 
@@ -55,7 +55,7 @@ The next step is to create the request:
 }
 ```
 
-### 3.2. Provide a presentation context
+### Provide a presentation context
 
 The presentation context provider simply requires the window in which the modal should be presented. For that your view controller needs to conform to `ASAuthorizationControllerPresentationContextProviding`. It requires only one method:
 
@@ -65,11 +65,11 @@ func presentationAnchor(for controller: ASAuthorizationController) -> ASPresenta
 }
 ```
 
-### 3.3. Handle the authorization response
+### Handle the authorization response
 
 Now that we have setup the request and the presentation context, we need to handle the response by conforming to `ASAuthorizationControllerDelegate`:
 
-#### 3.3.1 Handle authorization errors
+#### Handle authorization errors
 
 ```swift
 func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -85,7 +85,7 @@ For handling the error you can instantiate an `ASAuthorizationError` object by u
 You can see the error codes in the documentation for [ASAuthorizationError.Code](https://developer.apple.com/documentation/authenticationservices/asauthorizationerror/code). I recommend to not show an error alert for the canceled case, since the user actively canceled the process.
 
 
-#### 3.3.2 Handle a successful response
+#### Handle a successful response
 
 ```swift 
 func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -115,6 +115,6 @@ func exchangeCode(_ code: String) {
 }
 ```
 
-## 4. Backend authorization process
+## Backend authorization process
 
 The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md).
