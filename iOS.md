@@ -100,7 +100,7 @@ func authorizationController(controller: ASAuthorizationController, didCompleteW
 }
 ```
 
-We don't store any of the data Apple gives us here. We want our backend to verify the code, get the name and email on its own, store it, and return an API token.
+The only interesting information at this point is the `authorizationCode`. We don't store any of the data Apple gives us. We want our backend to verify the code, get the name and email on its own, verify or create a user, and return an API token.
 
 ```swift
 func exchangeCode(_ code: String) {
@@ -117,4 +117,4 @@ func exchangeCode(_ code: String) {
 
 ## Backend authorization process
 
-The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md).
+The backend will receive the code, send it to the AppleID API and get an `id_token` in return with the name and email in it. Read here about the [backend implementation](backend.md) or return to the [overview](README.md)
