@@ -114,7 +114,7 @@ func exchangeCode(_ code: String, handler: (String?, Error?) -> Void) {
 
 ### Checkout the iOS Demo app
 
-If you want to take a look at a sample app, check out the [iOS Demo App](/iOS%20Demo%20App/).
+You can take a look at the [ViewController.swift](/iOS%20Demo%20App/sign-in-with-apple-ios-demo) in our [iOS Demo App](/iOS%20Demo%20App).
 
 ### Backend authorization process
 
