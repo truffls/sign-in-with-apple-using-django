@@ -21,12 +21,12 @@ Steps 1-3 begin with how to [Implement Sign In with Apple on iOS](iOS.md).
 
 ### Generate the key
 
-Before we can start diving into code you'll need to [generate a key](identifiers-and-keys.md#create-a-sign-in-with-apple-key-for-your-backend) on Apple's Developer Portal in order for Apple to associate and verify your requests.
+Before we can start diving into the code you'll need to [generate a key](identifiers-and-keys.md#create-a-sign-in-with-apple-key-for-your-backend) on Apple's Developer Portal in order for Apple to associate and verify your requests.
 
 
 ### Authentication request to the Apple ID service
 
-Once the iOS app calls the backend providing a `authorizationCode`, we can build our authentication request. It consists of a few pieces:
+Once the iOS app calls the backend providing an `authorizationCode`, we can build our authentication request. It consists of a few pieces:
 
 - **Key ID** (The ID of the key you've generated on Apple's Developer Portal)
 - **Apple Developer Team ID**
@@ -70,11 +70,11 @@ This is also described in Apple's documentation [Creating the Client Secret](htt
 
 ### Implement a custom backend
 
-Now that you have the client secret generation ready, you can start with the custom backend. Python Social Auth implements OAuth 2.0 standards but Apple has some differences in their flow. In order to complete Sign In with Apple you have to extend `BaseOAuth2` and customize or override some functions.
+Now that you have the client secret generation ready, you can start with the custom backend. Python Social Auth implements the OAuth 2.0 standard but Apple has some differences in their flow. In order to complete Sign In with Apple you have to extend `BaseOAuth2` and customize or override some functions.
 
 - `get_key_and_secret` override this as you have to generate the client secret the way mentioned above
-- `get_user_details` override just to give back the email address or other user information to the Python Social Auth framework
-- `do_auth` override do_auth method as you need to verify the code or access token given by the iOS client from Apple and get the ID token from which other details can be extracted.
+- `get_user_details` override just to return the email address or other user information to the Python Social Auth framework
+- `do_auth` override `do_auth` as you need to verify the code or access token provided by the iOS client from Apple and get the ID token, from which other details can be extracted.
 
 
 ### What is so important about the ID Token?
@@ -177,7 +177,7 @@ A very important thing to know is, that the email address and the name are retur
 
 ### Not using Python Social Auth?
 
-If you are not using Python Social Auth, you can do the manual creation of the user after the validation and decoding of id_token you got from Apple. In case the uid already exists, then that's the same user, you just have to login. In our case Python Social Auth is doing this already :)
+If you are not using Python Social Auth, you can manually create the user after the validation and the decoding of the id_token you got from Apple. In case the uid already exists, then that's the same user, you just have to login. In our case Python Social Auth is doing this already :)
 
 
 ### What's next?
