@@ -1,5 +1,5 @@
-# Sign In with Apple and Server-Side verification
-_with iOS as client and Python Django + Python Social Auth as backend._
+# Sign In with Apple using Python Django
+_An implementation with Python Django + Python Social Auth and iOS._
 
 Apple announced a new feature, "Sign In with Apple" enabling users to sign in to apps using their Apple ID. This new feature is meant to be a secure and privacy-friendly way for users to create an account in apps. Most iOS and Mac users already have an Apple ID, and this new feature lets them use that Apple ID to sign in to other apps and websites.
 
