@@ -43,11 +43,11 @@ Now you can continue with the [iOS implementation](iOS.md#1-add-the-authenticati
 
 <img src="resources/key-1.png"/>
 
-### Give it a name and tick the Sign In with Apple checkbox
+### Give it a name, tick the Sign In with Apple checkbox and click "Configure"
 
 <img src="resources/key-2.png"/>
 
-### Click "Configure", select you app ID, and click "Save"
+### Select you app ID, and click "Save"
 
 <img src="resources/key-3.png"/>
 
@@ -59,15 +59,15 @@ Now you can continue with the [iOS implementation](iOS.md#1-add-the-authenticati
 
 <img src="resources/key-5.png"/>
 
-### Download the key file by clicking "Download"
+### Download the key file by clicking "Download", then click "Done"
 
 <img src="resources/key-6.png"/>
 
-### Finish by clicking "Done"
+### Click on the key in the list to see the details including key ID again
 
 <img src="resources/key-7.png"/>
 
-### Click on the key to see the key ID again
+### You'll need key ID later in the backend implementation.
 
 <img src="resources/key-8.png"/>
 
