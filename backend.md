@@ -178,3 +178,8 @@ A very important thing to know is, that the email address and the name are retur
 ### Not using Python Social Auth?
 
 If you are not using Python Social Auth, you can do the manual creation of the user after the validation and decoding of id_token you got from Apple. In case the uid already exists, then that's the same user, you just have to login. In our case Python Social Auth is doing this already :)
+
+
+### What's next?
+
+If you haven't started with the iOS app yet, you can start to [Implement Sign In with Apple on iOS](iOS.md).
