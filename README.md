@@ -7,7 +7,7 @@ Apple is taking a firm stance to protect user's privacy, rather than letting app
 
 ## What this document will cover
 
-This document is about how to implement Sign In with Apple on iOS and server-side verification for account creation in a Python Django backend with Python Social Auth.
+Like many developers providing third party login in their apps, we at Truffls had to implement Sign In with Apple as well since we (at the time of this article) offer many login options like Xing, LinkedIn, Google, and Facebook. So this document is about how we implemented Sign In with Apple on iOS and in our Django backend for server-side verification with Python Social Auth. We devided the document in three parts:
 
 1. [Configure Identifiers and Keys](identifiers-and-keys.md)
 2. [Implement Sign In with Apple in your backend](backend.md)
