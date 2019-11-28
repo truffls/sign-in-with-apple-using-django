@@ -3,28 +3,25 @@
 
 _Requirements: Python 3, Django 2_
 
-
-### Intro
-
-Apple adopted the existing standards **OAuth 2.0** and **OpenID Connect** to use as the foundation for their new API. If you're familiar with these technologies, you can easily start Sign In with Apple right away!
-
-In this article we'll be using **Python Social Auth**. It has OAuth 2.0 and OpenID support built in. On top of that we'll build a custom backend that will help. We just have to override some functionality and we're good to go.
-
-
 ### How it works
+
+The authentication part of the new API is built on top of the existing standards OAuth 2.0 and OpenID Connect. If you're familiar with these technologies, you can easily start implementing Sign in with Apple.
 
 In the diagram you can see the whole authentication flow covering all steps.  
 Steps 1-3 begin with how to [Implement Sign In with Apple on iOS](iOS.md).
 
 <img src="resources/flow-diagram.png">
 
+### Python Social Auth
 
-### Generate the key
+We'll be using Python Social Auth as it provides OAuth 2.0 and OpenID support. We'll be adding a new custom backend.
 
-Before we can start diving into the code you'll need to [generate a key](identifiers-and-keys.md#create-a-sign-in-with-apple-key-for-your-backend) on Apple's Developer Portal in order for Apple to associate and verify your requests.
+### Generating the private key
+
+Before you start diving into the code, you'll need to [generate a key](identifiers-and-keys.md#create-a-sign-in-with-apple-key-for-your-backend) on Apple's Developer Portal in order for Apple to associate and verify your requests.
 
 
-### Authentication request to the Apple ID service
+### Request to the Apple ID service
 
 Once the iOS app calls the backend providing an `authorizationCode`, we can build our authentication request. It consists of a few pieces:
 
@@ -36,7 +33,9 @@ Once the iOS app calls the backend providing an `authorizationCode`, we can buil
 
 ### Create the client secret
 
-Rather than static client secrets, Apple requires you to derive a client secret from your private key every time. We need the `ES256` JWT algorithm to generate it. There are already some libraries to do this for you. In this example we use `PyJwt`.
+Apple requires you to derive a client secret yourself from your private key every time. They use the ES256 JWT algorithm to generate that secret. This is also described in Apple's documentation Creating the Client Secret.
+
+We have used PyJWT to generate the client secret.
 
 ```shell
 pip install pyjwt
@@ -65,16 +64,13 @@ client_secret = jwt.encode(
 ).decode("utf-8")
 ```
 
-This is also described in Apple's documentation [Creating the Client Secret](https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens).
+### Implementing a custom backend
 
-
-### Implement a custom backend
-
-Now that you have the client secret generation ready, you can start with the custom backend. Python Social Auth implements the OAuth 2.0 standard but Apple has some differences in their flow. In order to complete Sign In with Apple you have to extend `BaseOAuth2` and customize or override some functions.
+Now that you can make authenticated requests, you can start with the custom backend. Python Social Auth implements the OAuth 2.0 standard but Apple has some differences in their flow. In order to complete Sign In with Apple you have to extend BaseOAuth2 and customise or override some functions.
 
 - `get_key_and_secret` override this as you have to generate the client secret the way mentioned above
-- `get_user_details` override just to return the email address or other user information to the Python Social Auth framework
-- `do_auth` override `do_auth` as you need to verify the code or access token provided by the iOS client from Apple and get the ID token, from which other details can be extracted.
+- `get_user_details` override just to give the email address or other user information back to the Python Social Auth framework
+- `do_auth` override this method as you need to verify the code or access token given by mobile client from apple and get the ID token from which other details can be extracted.
 
 
 ### What is so important about the ID Token?
@@ -87,9 +83,9 @@ You can decode the token by using JWT:
 decoded = jwt.decode(id_token, '', verify=False)
 ```
 
-This is described in Apple's documentation [Generate and Validate Tokens](https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens).
+You can also refer to Apple's documentation [Generate and Validate Tokens](https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens) that explains this.
 
-We have created a `AppleOAuth2` class as a custom backend for Sign In with Apple using Python Social Auth.
+We have created the `AppleOAuth2` class as a custom backend doing Sign In with Apple using Python Social Auth.
 
 ```python
 import jwt
@@ -172,12 +168,12 @@ class AppleOAuth2(BaseOAuth2):
         return settings.CLIENT_ID, client_secret
 ```
 
-A very important thing to know is, that the email address and the name are returned only the first time you make the request. So, if you need to test this over and over again, you need to remove your app from the authorised apps of your [AppleID account](https://appleid.apple.com) everytime.
+A very important thing to know is, that the email address and the name are returned only the first time you make the request. So, if you need to test this over and over again, you need to remove your app from the authorized apps of your [AppleID account](https://appleid.apple.com) everytime.
 
 
 ### Not using Python Social Auth?
 
-If you are not using Python Social Auth, you can manually create the user after the validation and the decoding of the id_token you got from Apple. In case the uid already exists, then that's the same user, you just have to login. In our case Python Social Auth is doing this already :)
+If you are not using Python Social Auth, you can manually create the user after the validation of the user and decoding of the `id_token` you got from Apple. In case the uid already exists, then that's the same user, you just have to login. In our case Python Social Auth is doing this already :)
 
 
 ### What's next?
