@@ -102,6 +102,7 @@ class AppleOAuth2(BaseOAuth2):
 
     name = 'apple'
     ACCESS_TOKEN_URL = 'https://appleid.apple.com/auth/token'
+    AUTHORIZATION_URL = 'https://appleid.apple.com/auth/authorize'
     SCOPE_SEPARATOR = ','
     ID_KEY = 'uid'
 
